@@ -7,81 +7,45 @@
 	android:layout_height = "match_parent"
 	tools:context = "com.demotest.Demo1"
 	>
-	<android.support.v7.widget.Toolbar
-		android:id = "@+id/toolbar3"
-		android:layout_width = "0dp"
-		android:layout_height = "wrap_content"
-		android:background = "?attr/colorPrimary"
-		android:minHeight = "?attr/actionBarSize"
-		android:theme = "?attr/actionBarTheme"
-		app:layout_constraintLeft_toLeftOf = "parent"
-		app:layout_constraintRight_toRightOf = "parent"
-		tools:layout_editor_absoluteY = "-4dp"
-		app:layout_constraintHorizontal_bias = "0.0"
-		/>
-	<Button
-		android:id = "@+id/button"
-		android:layout_width = "wrap_content"
-		android:layout_height = "wrap_content"
-		android:layout_marginBottom = "8dp"
-		android:layout_marginEnd = "8dp"
-		android:layout_marginLeft = "8dp"
-		android:layout_marginRight = "8dp"
-		android:layout_marginStart = "8dp"
-		android:layout_marginTop = "8dp"
-		android:text = "注册"
-		app:layout_constraintBottom_toBottomOf = "parent"
-		app:layout_constraintHorizontal_bias = "0.009"
-		app:layout_constraintLeft_toLeftOf = "@+id/guideline"
-		app:layout_constraintRight_toRightOf = "parent"
-		app:layout_constraintTop_toTopOf = "parent"
-		app:layout_constraintVertical_bias = "0.777"
-		/>
 	
-	<Button
-		android:id = "@+id/button2"
-		android:layout_width = "wrap_content"
+	<android.support.design.widget.AppBarLayout
+		android:id = "@+id/appBarLayout2"
+		android:layout_width = "395dp"
 		android:layout_height = "wrap_content"
-		android:layout_marginBottom = "8dp"
-		android:layout_marginEnd = "8dp"
-		android:layout_marginLeft = "8dp"
-		android:layout_marginRight = "8dp"
-		android:layout_marginTop = "427dp"
-		android:text = "登录"
-		app:layout_constraintBottom_toBottomOf = "parent"
-		app:layout_constraintHorizontal_bias = "0.882"
-		app:layout_constraintLeft_toLeftOf = "parent"
-		app:layout_constraintRight_toLeftOf = "@+id/guideline"
-		app:layout_constraintTop_toTopOf = "parent"
-		app:layout_constraintVertical_bias = "0.0"
-		android:layout_marginStart = "8dp"
-		/>
-	
-	<android.support.constraint.Guideline
-		android:layout_width = "wrap_content"
-		android:layout_height = "wrap_content"
-		android:id = "@+id/guideline"
-		android:orientation = "vertical"
-		app:layout_constraintGuide_percent = "0.5"
+		android:theme = "@style/AppThemeMain"
 		tools:layout_editor_absoluteY = "0dp"
-		tools:layout_editor_absoluteX = "206dp"
-		/>
+		tools:layout_editor_absoluteX = "8dp"
+		>
+		
+		<android.support.v7.widget.Toolbar
+			android:id = "@+id/toolbar3"
+			android:layout_width = "0dp"
+			android:layout_height = "wrap_content"
+			android:background = "?attr/colorPrimary"
+			android:minHeight = "?attr/actionBarSize"
+			android:theme = "?attr/actionBarTheme"
+			app:layout_constraintHorizontal_bias = "0.0"
+			app:layout_constraintLeft_toLeftOf = "parent"
+			app:layout_constraintRight_toRightOf = "parent"
+			/>
+	</android.support.design.widget.AppBarLayout>
 	
-	<Switch
-		android:id = "@+id/switch1"
+	<Button
+		android:id="@+id/demo1_btn"
 		android:layout_width = "wrap_content"
 		android:layout_height = "wrap_content"
-		android:textOff="蓝牙关闭中"
-		android:textOn="蓝牙开启中"
-		app:layout_constraintLeft_toLeftOf = "@+id/button"
+		android:text="序列化"
+		android:textColor="#000000"
+		android:layout_marginRight = "8dp"
+		app:layout_constraintRight_toRightOf = "parent"
 		android:layout_marginLeft = "8dp"
-		app:layout_constraintRight_toRightOf = "@+id/button"
-		app:layout_constraintHorizontal_bias = "1.0"
-		android:layout_marginBottom = "23dp"
-		app:layout_constraintBottom_toTopOf = "@+id/button"
+		app:layout_constraintLeft_toLeftOf = "parent"
+		android:layout_marginTop = "37dp"
+		app:layout_constraintTop_toBottomOf = "@+id/appBarLayout2"
+		app:layout_constraintHorizontal_bias = "0.026"
 		android:layout_marginStart = "8dp"
+		android:layout_marginEnd = "8dp"
 		/>
-	
 
 
 </android.support.constraint.ConstraintLayout>
