@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,12 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andexert.library.RippleView;
-import com.apkfuns.logutils.LogUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
@@ -219,13 +219,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick( final View v ) {
-                startActivity(new Intent(MainActivity.this ,Demo1.class));
-//                finish();
-            }
-        });
         Observable.create(new ObservableOnSubscribe< String >() {
             @Override
             public void subscribe( final ObservableEmitter< String > e ) throws Exception {
@@ -265,9 +258,23 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( final View v ) {
-                Snackbar.make(v ,"撤销" ,Snackbar.LENGTH_SHORT).show();
-                LogUtils.d("12345");
-//                    Toasty.success(MainActivity.this , "点击了悬浮按钮" , 1 , false).show();
+                new QMUIDialog.MessageDialogBuilder(MainActivity.this)
+                    .setTitle("标题")
+                    .setMessage("确定要发送吗？")
+                    .addAction("取消", new QMUIDialogAction.ActionListener() {
+                        @Override
+                        public void onClick(QMUIDialog dialog, int index) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .addAction("确定", new QMUIDialogAction.ActionListener() {
+                        @Override
+                        public void onClick(QMUIDialog dialog, int index) {
+                            dialog.dismiss();
+                            Toast.makeText(MainActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .show();
             }
         });
         more.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
