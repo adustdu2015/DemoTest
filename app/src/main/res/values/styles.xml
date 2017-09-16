@@ -21,10 +21,11 @@
 	
 	<style name = "AppThemeMain.PopupOverlay" parent = "ThemeOverlay.AppCompat.Light" />
 	
-	<style name = "appThemeSecond" parent="QMUI.Compat">
+	<style name = "appThemeSecond" parent="QMUI.Compat.NoActionBar">
 		<item name = "colorPrimary">@color/colorPrimary</item>
 		<item name = "colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name = "colorAccent">@color/colorAccent</item>
 		<item name = "android:textColorPrimary">@android:color/background_light</item>
+		
 	</style>
 </resources>

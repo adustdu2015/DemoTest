@@ -1,6 +1,7 @@
 package com.demotest;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -19,13 +20,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andexert.library.RippleView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
+import com.othershe.nicedialog.BaseNiceDialog;
+import com.othershe.nicedialog.NiceDialog;
+import com.othershe.nicedialog.ViewConvertListener;
+import com.othershe.nicedialog.ViewHolder;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private Animation animation = null;
     private RippleView more;
+    private QMUITipDialog tipDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,19 +72,18 @@ public class MainActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-
-                Glide.with(MainActivity.this).load("https://static.oschina.net/uploads/img/201708/14090048_hz62.jpg").
-                    asBitmap().
-					placeholder(R.drawable.placeholder_unknown).//占位符
-                    error(R.drawable.error).  //占位错误符
-                    diskCacheStrategy(DiskCacheStrategy.ALL).
-                    into(mImageView);
-
-
-                Log.d(TAG, "onClick: ");
-                // TODO: 2017/8/19 下一步
-                // FIXME: 2017/8/19
-                Log.d(TAG, new Test().getName());
+                tipDialog = new QMUITipDialog.Builder(MainActivity.this)
+                    .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
+                    .setTipWord("发送成功")
+                    .create();
+                tipDialog.show();
+//                tipDialog.dismiss();
+                imageC.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        tipDialog.dismiss();
+                    }
+                },1500);
             }
         });
         imageC.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(String value) {
-                        Log.d(TAG, "" + value);
+                        Toasty.error(MainActivity.this ,value ,Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -219,39 +223,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Observable.create(new ObservableOnSubscribe< String >() {
-            @Override
-            public void subscribe( final ObservableEmitter< String > e ) throws Exception {
-                    e.onNext("你好");
-                    e.onComplete();
-            }
-        }).subscribe(new Observer< String >() {
-            @Override
-            public void onSubscribe( final Disposable d ) {
-                Log.d(TAG, "onSubscribe2: ");
-            }
-
-            @Override
-            public void onNext( final String pS ) {
-                Log.d(TAG, "onNext: "+pS);
-            }
-
-            @Override
-            public void onError( final Throwable e ) {
-
-            }
-
-            @Override
-            public void onComplete() {
-                Log.d(TAG, "onComplete2: ");
-            }
-        });
-
         button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( final View v ) {
-                startActivity(new Intent(MainActivity.this ,Main2Activity.class));
-//                finish();
+                final String[] items = new String[]{"选项1", "选项2", "选项3"};
+                new QMUIDialog.MenuDialogBuilder(MainActivity.this)
+                    .addItems(items, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(MainActivity.this, "你选择了 " + items[which], Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
             }
         });
         //悬浮按钮点击
@@ -280,7 +264,34 @@ public class MainActivity extends AppCompatActivity {
         more.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
             @Override
             public void onComplete( final RippleView rippleView ) {
-                Toasty.success(MainActivity.this, "修改成功", Toast.LENGTH_SHORT, true).show();
+                new QMUIDialog.MessageDialogBuilder(MainActivity.this)
+                    .setTitle("标题")
+                    .setMessage("确定要删除吗？")
+                    .addAction("取消", new QMUIDialogAction.ActionListener() {
+                        @Override
+                        public void onClick(QMUIDialog dialog, int index) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .addAction(0, "删除", QMUIDialogAction.ACTION_PROP_NEGATIVE, new QMUIDialogAction.ActionListener() {
+                        @Override
+                        public void onClick(QMUIDialog dialog, int index) {
+                            Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+            }
+        });
+        button7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( final View v ) {
+                NiceDialog.init()
+                    .setLayoutId(R.layout.loading_layout)
+                    .setWidth(100)
+                    .setHeight(100)
+                    .setDimAmount(0)
+                    .show(getSupportFragmentManager());
             }
         });
         
@@ -332,8 +343,24 @@ public class MainActivity extends AppCompatActivity {
 
         switch ( item.getItemId() ){
             case android.R.id.home:
-                startActivity(new Intent(MainActivity.this ,Detail.class));
-                finish();
+//                startActivity(new Intent(MainActivity.this ,Detail.class));
+//                finish();
+                NiceDialog.init()
+                    .setLayoutId(R.layout.share_layout)
+                    .setConvertListener(new ViewConvertListener() {
+                        @Override
+                        public void convertView( ViewHolder holder, final BaseNiceDialog dialog) {
+                            holder.setOnClickListener(R.id.wechat, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Toast.makeText(MainActivity.this, "分享成功", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    })
+                    .setDimAmount(0.3f)
+                    .setShowBottom(true)
+                    .show(getSupportFragmentManager());
                 break;
         }
         return false;

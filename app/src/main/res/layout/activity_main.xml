@@ -75,11 +75,6 @@
 					android:layout_height = "40dp"
 					android:src="@drawable/ic_build_green_600_24dp"
 					/>
-				<android.support.v7.widget.SearchView
-					android:layout_width = "match_parent"
-					android:layout_height = "wrap_content"
-					android:background="#f0e0f0"
-					></android.support.v7.widget.SearchView>
 				<com.andexert.library.RippleView
 					android:id="@+id/more"
 					android:layout_width="?android:actionBarSize"

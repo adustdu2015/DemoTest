@@ -6,6 +6,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,5 +36,16 @@ public class Detail extends AppCompatActivity {
 	  CollapsingToolbarLayout collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById(R.id.collapsingToolbarLayout);
 	  Glide.with(this).load(fruitId).into(image_detail);
 	  textView_detail.setText(title+"111111111111111111111111111111111111111");
+   }
+   @Override
+   public boolean onOptionsItemSelected( final MenuItem item ) {
+
+	  switch ( item.getItemId() ){
+		 case android.R.id.home:
+//			startActivity(new Intent(Detail.this ,Detail.class));
+                finish();
+			break;
+	  }
+	  return false;
    }
 }

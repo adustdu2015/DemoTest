@@ -60,6 +60,7 @@ dependencies {
     debugCompile 'com.apkfuns.logutils:library:1.5.1.1'
     releaseCompile 'com.apkfuns.logutils:logutils-no-op:1.5.1.1'
     compile 'com.qmuiteam:qmui:1.0.3'
+    compile 'com.github.Othershe:NiceDialog:1.1.3'
 }
 
 
