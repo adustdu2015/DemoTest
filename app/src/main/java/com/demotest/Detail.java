@@ -3,7 +3,7 @@ package com.demotest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.ActionBar;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -26,13 +26,11 @@ public class Detail extends AppCompatActivity {
 	  String title = vIntent.getStringExtra("2");
 	  int fruitId = vIntent.getIntExtra("1" ,0);
 	  Toolbar vToolbar = ( Toolbar ) findViewById(R.id.toolBar_detail);
-		setSupportActionBar(vToolbar);
-	  ActionBar vActionBar = getSupportActionBar();
-	  if(vActionBar != null){
-		 vActionBar.setDisplayHomeAsUpEnabled(true);
-	  }
+	  setSupportActionBar(vToolbar);
+
 	  ImageView image_detail = ( ImageView ) findViewById(R.id.image_detail);
-	  TextView textView_detail = ( TextView ) findViewById(R.id.textView_detail);
+	  NestedScrollView mNestedScrollView = ( NestedScrollView ) findViewById(R.id.nestedScrollView_detail);
+ 	  TextView textView_detail = ( TextView ) findViewById(R.id.textView_detail);
 	  CollapsingToolbarLayout collapsingToolbarLayout = ( CollapsingToolbarLayout ) findViewById(R.id.collapsingToolbarLayout);
 	  Glide.with(this).load(fruitId).into(image_detail);
 	  textView_detail.setText(title+"111111111111111111111111111111111111111");
@@ -42,8 +40,7 @@ public class Detail extends AppCompatActivity {
 
 	  switch ( item.getItemId() ){
 		 case android.R.id.home:
-//			startActivity(new Intent(Detail.this ,Detail.class));
-                finish();
+//			finish();
 			break;
 	  }
 	  return false;

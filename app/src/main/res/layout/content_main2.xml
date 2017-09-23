@@ -9,18 +9,10 @@
 	tools:context = "com.demotest.Main2Activity"
 	tools:showIn = "@layout/app_bar_main2"
 	>
-	<android.support.v4.widget.SwipeRefreshLayout
-		android:id="@+id/swipeRefreshLayout"
-		android:layout_width = "match_parent"
-		android:layout_height = "match_parent"
-		app:layout_behavior='@string/app_name'
-		>
-
-	<android.support.v7.widget.RecyclerView
+	<com.jcodecraeer.xrecyclerview.XRecyclerView
 		android:id="@+id/recyclerImage"
 		android:layout_width = "match_parent"
-		android:layout_height = "match_parent"
+		android:layout_height = "wrap_content"
 		/>
 	
-	</android.support.v4.widget.SwipeRefreshLayout>
 </android.support.constraint.ConstraintLayout>

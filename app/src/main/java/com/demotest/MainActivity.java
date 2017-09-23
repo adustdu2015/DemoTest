@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.andexert.library.RippleView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
@@ -54,13 +53,12 @@ public class MainActivity extends AppCompatActivity {
     private Button mButton, button3, button4 , button5 ,button6 ,button7;
     private ImageView mImageView;
     private static final String TAG = "MainActivity";
-    private ImageView imageC;
+    private ImageView imageC , iv_next , more_image;
     private TextView temp;
     IWeather iWeather;
     private Toolbar toolbar;
     private FloatingActionButton fab;
     private Animation animation = null;
-    private RippleView more;
     private QMUITipDialog tipDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -261,9 +259,9 @@ public class MainActivity extends AppCompatActivity {
                     .show();
             }
         });
-        more.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+        more_image.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete( final RippleView rippleView ) {
+            public void onClick( final View v ) {
                 new QMUIDialog.MessageDialogBuilder(MainActivity.this)
                     .setTitle("标题")
                     .setMessage("确定要删除吗？")
@@ -283,15 +281,31 @@ public class MainActivity extends AppCompatActivity {
                     .show();
             }
         });
+//
+
         button7.setOnClickListener(new View.OnClickListener() {
+            NiceDialog fNiceDialog = NiceDialog.init();
             @Override
             public void onClick( final View v ) {
-                NiceDialog.init()
+                fNiceDialog
                     .setLayoutId(R.layout.loading_layout)
                     .setWidth(100)
                     .setHeight(100)
                     .setDimAmount(0)
                     .show(getSupportFragmentManager());
+                button7.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fNiceDialog.dismiss();
+                    }
+                },1500);
+            }
+        });
+        //toolbar中按钮被点击之后
+        iv_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( final View v ) {
+                startActivity(new Intent(MainActivity.this ,Main2Activity.class));
             }
         });
         
@@ -313,13 +327,15 @@ public class MainActivity extends AppCompatActivity {
         button6 = ( Button ) findViewById(R.id.button6);
         button7 = ( Button ) findViewById(R.id.button7);
         fab = ( FloatingActionButton ) findViewById(R.id.fab);
-        more = ( RippleView ) findViewById(R.id.more);
         Retrofit retrofit2 = new Retrofit.Builder()
             .baseUrl("https://api.thinkpage.cn")
             .addConverterFactory(GsonConverterFactory.create())
             .client(new OkHttpClient())
             .build();
         iWeather = retrofit2.create(IWeather.class);
+        iv_next = ( ImageView ) findViewById(R.id.iv_next);
+        more_image = ( ImageView ) findViewById(R.id.more_image);
+
     }
 
 

@@ -1,7 +1,7 @@
 <resources>
 	<string name = "app_name">DemoTest</string>
 	<string name = "looklog">点击我看日志</string>
-	<string name = "info">2017.8.19 日清日结；讨论知心平台患者端、医生端，搭建患者端草图。 下步计划:完善患者端草图 2017.8.20 日清日结；讨论知心平台患者端功能模块细节，优化草图，制作墨刀初稿。 下步计划:优化知心平台患者端墨刀。 2017.8.20 日清日结；上午休假，下午准备上岗考试 下步计划:优化知心平台患者端墨刀。 2017.8.22 日清日结；讨论知心医生患者端的功能显示，整理墨刀。 下步计划:根据墨刀和Ui图，搭建微信小程序界面</string>
+	<string name = "info">下步计划:根据墨刀和Ui图，搭建微信小程序界面</string>
 	<string name = "opening">正在打开</string>
 	<string name = "select_image">选择图片</string>
 	<string name = "permission_request_denied">Permission request denied</string>

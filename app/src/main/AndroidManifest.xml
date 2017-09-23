@@ -50,8 +50,6 @@
 		</activity>
 		<activity android:name = ".Detail">
 		</activity>
-		<activity android:name = ".Setting">
-		</activity>
 	</application>
 
 </manifest>
