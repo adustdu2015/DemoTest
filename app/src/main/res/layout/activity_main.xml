@@ -121,7 +121,7 @@
 					android:layout_marginLeft = "8dp"
 					android:layout_marginRight = "8dp"
 					android:layout_marginTop = "9dp"
-					android:text = "进入侧滑"
+					android:text = "QMUIDialog"
 					android:textColor = "@color/colorAccent"
 					app:layout_constraintHorizontal_bias = "0.248"
 					app:layout_constraintLeft_toRightOf = "@+id/button5"
