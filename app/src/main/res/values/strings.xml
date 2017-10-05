@@ -1,10 +1,10 @@
 <resources>
 	<string name = "app_name">DemoTest</string>
-	<string name = "looklog">点击我看日志</string>
-	<string name = "info">下步计划:根据墨刀和Ui图，搭建微信小程序界面</string>
+	<string name = "look_log">显示Dialog</string>
+	<string name = "info">天气情况</string>
 	<string name = "opening">正在打开</string>
 	<string name = "select_image">选择图片</string>
-	<string name = "permission_request_denied">Permission request denied</string>
+	<string name = "permission_request_denied">您拒绝了权限</string>
 	<string name = "title_activity_second">Second</string>
 	
 	<string name = "navigation_drawer_open">Open navigation drawer</string>

@@ -36,8 +36,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/share_wechat" />
 
             <TextView
@@ -57,8 +57,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+               android:layout_width="40dp"
+               android:layout_height="40dp"
                 android:background="@drawable/share_pyq" />
 
             <TextView
@@ -78,8 +78,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+               android:layout_width="40dp"
+               android:layout_height="40dp"
                 android:background="@drawable/share_qq" />
 
             <TextView
@@ -99,8 +99,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+               android:layout_width="40dp"
+               android:layout_height="40dp"
                 android:background="@drawable/share_kongjian" />
 
             <TextView
@@ -120,8 +120,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+               android:layout_width="40dp"
+               android:layout_height="40dp"
                 android:background="@drawable/share_weibo" />
 
             <TextView
