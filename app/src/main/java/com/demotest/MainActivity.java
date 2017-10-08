@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         setContentView(R.layout.activity_main);
 	   EventBus.getDefault().register(this);
 
+
+
 	   Observable.create(new ObservableOnSubscribe< Integer >() {
 		  @Override
 		  public void subscribe( final ObservableEmitter< Integer > e ) throws Exception {
@@ -128,8 +130,6 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 	   });
 
         initView();
-
-
     }
 
     void initView(){
