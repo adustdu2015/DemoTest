@@ -4,3 +4,4 @@ OkGo为2.0版本，
 Gson为3.7.0, 
 nickDialog，
 QMUI的使用。
+下载体验地址: https://fir.im/mks2?release_id=59d9cb33959d692ac300000c
