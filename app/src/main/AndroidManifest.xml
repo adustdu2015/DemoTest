@@ -12,21 +12,22 @@
 	<uses-permission android:name = "android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name = "android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name = "android.permission.READ_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-	<uses-permission android:name = "android.permission.BATTERY_STATS"/>
-	<uses-permission android:name = "android.permission.READ_SMS"/>
+	<uses-permission android:name = "android.permission.SYSTEM_ALERT_WINDOW" />
+	<uses-permission android:name = "android.permission.BATTERY_STATS" />
+	<uses-permission android:name = "android.permission.READ_SMS" />
 	
 	<application
+		android:name = ".AppContext"
 		android:allowBackup = "true"
 		android:icon = "@drawable/ic_motorcycle_black_48dp"
 		android:label = "@string/app_name"
-		android:name=".AppContext"
 		android:roundIcon = "@drawable/ic_motorcycle_black_48dp"
 		android:supportsRtl = "true"
 		android:theme = "@style/appThemeSecond"
 		>
-		<activity android:name = ".MainActivity"
-			android:label="网易云音乐"
+		<activity
+			android:name = ".MainActivity"
+			android:label = "网易云音乐"
 			>
 			<intent-filter>
 				<action android:name = "android.intent.action.MAIN" />
@@ -54,6 +55,15 @@
 			>
 		</activity>
 		<activity android:name = ".Detail">
+		</activity>
+		<activity
+			android:name = ".FullscreenActivity"
+			android:configChanges = "orientation|keyboardHidden|screenSize"
+			android:label = "@string/title_activity_fullscreen"
+			android:theme = "@style/FullscreenTheme"
+			>
+		</activity>
+		<activity android:name = ".ImageGallery">
 		</activity>
 	</application>
 

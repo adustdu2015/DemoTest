@@ -153,7 +153,7 @@
 					android:text="天气情况"
 					android:textAllCaps="false"
 					/>
-				<com.github.chrisbanes.photoview.PhotoView
+				<ImageView
 					android:id="@+id/photo_view"
 					android:layout_width="200dp"
 					android:layout_height="200dp"/>
@@ -163,7 +163,8 @@
 					android:layout_width = "60dp"
 					android:layout_height = "60dp"
 					android:layout_gravity="end|bottom"
-					android:src="@drawable/ic_build_green_600_24dp"
+					android:src="@drawable/explore_48dp"
+					android:background="@null"
 					app:elevation="4dp"
 					android:layout_marginBottom="16dp"
 					android:layout_marginRight="16dp"

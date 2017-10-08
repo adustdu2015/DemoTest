@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.chrisbanes.photoview.PhotoView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     private ImageView imageC , iv_next , more_image;
     private TextView temp;
     IWeather iWeather;
-   private PhotoView photo_view;
+   private ImageView photo_view;
     private Toolbar toolbar;
     private FloatingActionButton fab;
     private Animation animation = null;
@@ -176,12 +175,19 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 	   weath = ( Button ) findViewById(R.id.weath);
 	   weath.setOnClickListener(this);
 
-	   photo_view = ( PhotoView ) findViewById(R.id.photo_view);
+	   photo_view = ( ImageView ) findViewById(R.id.photo_view);
 	   photo_view.setImageResource(R.drawable.postsql);
+	   photo_view.setOnClickListener(this);
     }
 
 
-    @Override
+   /**
+	* 图片选择的回调函数
+	* @param requestCode
+	* @param resultCode
+	* @param data
+	*/
+   @Override
     protected void onActivityResult( final int requestCode, final int resultCode, final Intent data ) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
@@ -236,6 +242,11 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
         switch ( v.getId()  ){
 
+		   case R.id.photo_view:
+		      Intent mIntent = new Intent(MainActivity.this ,ImageGallery.class);
+			  mIntent.putExtra("keys" ,"postsql");
+		      startActivity(mIntent);
+			  break;
 		   case R.id.btn:
 		      //QMUI的提示Dialog
 			  tips();
@@ -275,7 +286,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 startActivity(new Intent(MainActivity.this ,Main2Activity.class));
                 break;
             case R.id.fab:
-                qDialog();
+//                qDialog();
+			   startActivity(new Intent(MainActivity.this ,FullscreenActivity.class));
                 break;
 		   case R.id.rx:
 		      //申请读取SMS

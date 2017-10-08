@@ -21,11 +21,23 @@
 	
 	<style name = "AppThemeMain.PopupOverlay" parent = "ThemeOverlay.AppCompat.Light" />
 	
-	<style name = "appThemeSecond" parent="QMUI.Compat.NoActionBar">
+	<style name = "appThemeSecond" parent = "QMUI.Compat.NoActionBar">
 		<item name = "colorPrimary">#ce3d3a</item>
 		<item name = "colorPrimaryDark">#ce3d3a</item>
-		<item name = "colorAccent">@color/colorAccent</item>
+		<item name = "colorAccent">#ffffff</item>
 		<item name = "android:textColorPrimary">#ffffff</item>
 	
+	</style>
+	
+	<style name = "FullscreenTheme" parent = "appThemeSecond">
+		<item name = "android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+		<item name = "android:windowActionBarOverlay">true</item>
+		<item name = "android:windowBackground">@null</item>
+		<item name = "metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+		<item name = "metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+	</style>
+	
+	<style name = "FullscreenActionBarStyle" parent = "android:Widget.Holo.ActionBar">
+		<item name = "android:background">@color/black_overlay</item>
 	</style>
 </resources>
