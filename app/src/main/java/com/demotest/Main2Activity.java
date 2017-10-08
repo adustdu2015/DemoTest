@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
+import org.simple.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,11 @@ public class Main2Activity extends AppCompatActivity
    protected void onCreate( Bundle savedInstanceState ) {
 	  super.onCreate(savedInstanceState);
 	  setContentView(R.layout.activity_main2);
+	  /**
+	   * 发送事件
+	   */
+	  EventBus.getDefault().post(new User("android"), "my_tag");
+
 	  ButterKnife.bind(this);
 
 	  initView();
@@ -73,11 +80,10 @@ public class Main2Activity extends AppCompatActivity
 		 }
 	  });
 
-
-
-
-
    }
+
+
+
 
    private void initFruit() {
 	  for ( int i = 0; i < 2; i++ ) {
@@ -167,4 +173,6 @@ public class Main2Activity extends AppCompatActivity
 	  fDrawerLayout.closeDrawer(GravityCompat.START);
 	  return true;
    }
+
+
 }

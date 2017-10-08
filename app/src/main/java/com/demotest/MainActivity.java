@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.chrisbanes.photoview.PhotoView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
@@ -35,12 +36,16 @@ import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
+
 import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,12 +57,12 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
    private static final int REQUEST_CODE_CHOOSE = 23;
    private  static  final String urls = "https://free-api.heweather.com/v5/weather";
-//   ?city=yourcity&key=yourkey
-    private Button mButton,  button4 , button5 ,button6 ,button7 ,rx , weath;
+    private Button mButton,  button4 , button5 ,button6 ,button7 ,rx , weath ;
     private static final String TAG = "MainActivity";
     private ImageView imageC , iv_next , more_image;
     private TextView temp;
     IWeather iWeather;
+   private PhotoView photo_view;
     private Toolbar toolbar;
     private FloatingActionButton fab;
     private Animation animation = null;
@@ -67,16 +72,73 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+	   EventBus.getDefault().register(this);
+
+	   Observable.create(new ObservableOnSubscribe< Integer >() {
+		  @Override
+		  public void subscribe( final ObservableEmitter< Integer > e ) throws Exception {
+			e.onNext(1);
+			 e.onNext(2);
+			 e.onNext(3);
+			 e.onComplete();
+			 e.onNext(4);
+		  }
+	   }).subscribe(new Observer< Integer >() {
+		  Disposable mDisposable;
+		  int  i = 0;
+		  @Override
+		  public void onSubscribe( final Disposable d ) {
+			 Log.d(TAG, "onSubscribe");
+			 mDisposable = d;
+		  }
+
+		  @Override
+		  public void onNext( final Integer pInteger ) {
+			 Log.d(TAG, pInteger.toString());
+			 i++;
+			
+			 if(i == 2 ){
+				mDisposable.dispose();
+				Log.d(TAG, "isDisposeable:"+mDisposable.isDisposed());
+			 }
+			
+		  }
+
+		  @Override
+		  public void onError( final Throwable e ) {
+			 Log.d(TAG, "onError");
+		  }
+
+		  @Override
+		  public void onComplete() {
+			 Log.d(TAG, "onComplete");
+		  }
+	   });
+
+	   Observable.create(new ObservableOnSubscribe< Integer >() {
+		  @Override
+		  public void subscribe( final ObservableEmitter< Integer > e ) throws Exception {
+			e.onNext(5);
+		  }
+	   }).subscribe(new Consumer< Integer >() {
+		  @Override
+		  public void accept( final Integer pInteger ) throws Exception {
+			 Log.d(TAG, "accept: "+ pInteger.toString());
+		  }
+	   });
+
         initView();
+
 
     }
 
     void initView(){
+
         toolbar = ( Toolbar ) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar vActionBar = getSupportActionBar();
         vActionBar.setDisplayHomeAsUpEnabled(true);
-        vActionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
+		vActionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
         mButton = (Button) findViewById(R.id.btn);
 	   	mButton.setOnClickListener(this);
@@ -114,6 +176,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 	   weath = ( Button ) findViewById(R.id.weath);
 	   weath.setOnClickListener(this);
 
+	   photo_view = ( PhotoView ) findViewById(R.id.photo_view);
+	   photo_view.setImageResource(R.drawable.postsql);
     }
 
 
@@ -161,11 +225,17 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         return false;
     }
 
+   @Subscriber (tag = "my_tag")
+   private void updateUserWithTag(User user) {
+	  Log.e(TAG, user.name);
+   }
+
 
     @Override
     public void onClick( final View v ) {
 
         switch ( v.getId()  ){
+
 		   case R.id.btn:
 		      //QMUI的提示Dialog
 			  tips();
@@ -414,6 +484,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         },1500);
     }
 
+
     void qmuiDialog(){
 
 	   new QMUIDialog.MessageDialogBuilder(MainActivity.this)
@@ -434,4 +505,11 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             })
             .show();
     }
+
+   @Override
+   protected void onDestroy() {
+	  EventBus.getDefault().unregister(this);
+	  super.onDestroy();
+
+   }
 }

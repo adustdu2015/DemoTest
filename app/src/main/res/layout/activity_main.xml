@@ -31,10 +31,10 @@
 			>
 			<ImageView
 				android:id="@+id/iv_next"
-				android:layout_width = "wrap_content"
-				android:layout_height = "20dp"
+				android:layout_width = "30dp"
+				android:layout_height = "30dp"
 				android:layout_gravity="right"
-				android:src="@drawable/ic_3d_rotation_red_300_24dp"
+				android:src="@drawable/ic_search_white_36dp"
 				android:layout_marginRight="14dp"
 				/>
 		</android.support.v7.widget.Toolbar>
@@ -122,11 +122,12 @@
 					android:layout_marginRight = "8dp"
 					android:layout_marginTop = "9dp"
 					android:text = "QMUIDialog"
-					android:textColor = "@color/colorAccent"
+					android:textColor = "#ce3d3a"
 					app:layout_constraintHorizontal_bias = "0.248"
 					app:layout_constraintLeft_toRightOf = "@+id/button5"
 					app:layout_constraintRight_toRightOf = "parent"
 					app:layout_constraintTop_toBottomOf = "@+id/linearLayout"
+					
 					/>
 				
 				<Button
@@ -136,6 +137,7 @@
 					android:text = "记入Demo1"
 					android:background="@drawable/actionbar_btn_auto"
 					android:textColor="#ff8800"
+					android:typeface="serif"
 					/>
 				<Button
 					android:id="@+id/rx"
@@ -151,7 +153,11 @@
 					android:text="天气情况"
 					android:textAllCaps="false"
 					/>
-
+				<com.github.chrisbanes.photoview.PhotoView
+					android:id="@+id/photo_view"
+					android:layout_width="200dp"
+					android:layout_height="200dp"/>
+				
 				<android.support.design.widget.FloatingActionButton
 					android:id="@+id/fab"
 					android:layout_width = "60dp"
@@ -162,6 +168,7 @@
 					android:layout_marginBottom="16dp"
 					android:layout_marginRight="16dp"
 					/>
+				
 			</LinearLayout>
 		</android.support.v4.widget.NestedScrollView>
 

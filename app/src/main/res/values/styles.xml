@@ -10,8 +10,8 @@
 	</style>
 	
 	<style name = "AppThemeMain" parent = "Theme.AppCompat.Light.NoActionBar">
-		<item name = "colorPrimary">@color/colorPrimary</item>
-		<item name = "colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name = "colorPrimary">#ce3d3a</item>
+		<item name = "colorPrimaryDark">#ce3d3a</item>
 		<item name = "colorAccent">@color/colorAccent</item>
 		<item name = "android:textColorPrimary">@android:color/background_light</item>
 	
@@ -22,10 +22,10 @@
 	<style name = "AppThemeMain.PopupOverlay" parent = "ThemeOverlay.AppCompat.Light" />
 	
 	<style name = "appThemeSecond" parent="QMUI.Compat.NoActionBar">
-		<item name = "colorPrimary">#1B88EE</item>
-		<item name = "colorPrimaryDark">#1B88EE</item>
+		<item name = "colorPrimary">#ce3d3a</item>
+		<item name = "colorPrimaryDark">#ce3d3a</item>
 		<item name = "colorAccent">@color/colorAccent</item>
-		<item name = "android:textColorPrimary">@android:color/background_dark</item>
+		<item name = "android:textColorPrimary">#ffffff</item>
 	
 	</style>
 </resources>
