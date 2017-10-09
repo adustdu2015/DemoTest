@@ -92,29 +92,18 @@
 						android:layout_centerInParent="true"
 						android:padding="10dp"
 						android:background="@android:color/holo_blue_dark"/>
+					
 					<Button
-						android:id = "@+id/button4"
-						android:layout_width = "wrap_content"
+						android:id = "@+id/button7"
+						android:layout_width = "98dp"
 						android:layout_height = "wrap_content"
-						android:layout_marginLeft="10dp"
-						android:text = "@string/select_image"
-						android:textColor = "@color/colorPrimary"
+						android:text = "显示进度"
+						android:background="@drawable/actionbar_btn_auto"
+						android:textColor="#ff8800"
+						android:typeface="serif"
 						/>
+					
 				</LinearLayout>
-				
-				<Button
-					android:id = "@+id/button5"
-					android:layout_width = "wrap_content"
-					android:layout_height = "wrap_content"
-					android:text = "订阅走一步"
-					android:textColor="@color/colorPrimary"
-					android:layout_marginLeft = "8dp"
-					android:layout_marginTop = "9dp"
-					android:layout_marginRight = "8dp"
-					android:layout_marginStart = "8dp"
-					android:layout_marginEnd = "8dp"
-					/>
-				
 				<Button
 					android:id = "@+id/button6"
 					android:layout_width = "wrap_content"
@@ -131,15 +120,7 @@
 					
 					/>
 				
-				<Button
-					android:id = "@+id/button7"
-					android:layout_width = "98dp"
-					android:layout_height = "wrap_content"
-					android:text = "记入Demo1"
-					android:background="@drawable/actionbar_btn_auto"
-					android:textColor="#ff8800"
-					android:typeface="serif"
-					/>
+			
 				<Button
 					android:id="@+id/rx"
 					android:layout_width = "wrap_content"

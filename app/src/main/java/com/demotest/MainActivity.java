@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
    private static final int REQUEST_CODE_CHOOSE = 23;
    private  static  final String urls = "https://free-api.heweather.com/v5/weather";
-    private Button mButton,  button4 , button5 ,button6 ,button7 ,rx , weath ,imageC;
+    private Button mButton ,button6 ,button7 ,rx , weath ,imageC;
     private static final String TAG = "MainActivity";
    private ImageView iv_next;
    private ImageView more_image;
@@ -130,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     void initView(){
 
+
+
         toolbar = ( Toolbar ) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar vActionBar = getSupportActionBar();
@@ -144,10 +146,6 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
         temp = ( TextView ) findViewById(R.id.temp);
 
-        button4  = ( Button ) findViewById(R.id.button4);
-	   	button4.setOnClickListener(this);
-        button5  = ( Button ) findViewById(R.id.button5);
-	   	button5.setOnClickListener(this);
 
         button6 = ( Button ) findViewById(R.id.button6);
 	   	button6.setOnClickListener(this);
@@ -253,18 +251,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 			  tips();
 			  break;
 
-            case R.id.button4:
-               //请求权限
-                pemissions();
-                break;
-
             case R.id.img_setting:
                 retro();
+                break;
 
-                break;
-            case  R.id.button5:
-                reTest();
-                break;
             case R.id.button6:
                 final String[] items = new String[]{"选项1", "选项2", "选项3"};
                 new QMUIDialog.MenuDialogBuilder(MainActivity.this)
@@ -276,6 +266,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                         }
                     })
                     .show();
+			   reTest();
                 break;
             case R.id.button7:
                 niceDialog();
@@ -285,16 +276,40 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 break;
 
             case  R.id.iv_next:
-                startActivity(new Intent(MainActivity.this ,Main2Activity.class));
+               RxPermissions mPermissions =new RxPermissions(MainActivity.this);
+			   mPermissions.request(Manifest.permission.READ_SMS).subscribe(new Observer< Boolean >() {
+				  @Override
+				  public void onSubscribe( final Disposable d ) {
+
+				  }
+
+				  @Override
+				  public void onNext( final Boolean pBoolean ) {
+						if(pBoolean){
+						   startActivity(new Intent(MainActivity.this ,Main2Activity.class));
+						}
+				  }
+
+				  @Override
+				  public void onError( final Throwable e ) {
+
+				  }
+
+				  @Override
+				  public void onComplete() {
+
+				  }
+			   });
+
                 break;
             case R.id.fab:
-//                qDialog();
 			   startActivity(new Intent(MainActivity.this ,FullscreenActivity.class));
                 break;
 		   case R.id.rx:
 		      //申请读取SMS
-		      RxPermissions mRxPermissions = new RxPermissions(MainActivity.this);
-			  mRxPermissions.request(Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS).
+			 RxPermissions mRxPermissions = new RxPermissions(MainActivity.this);
+			  mRxPermissions.request(Manifest.permission.BLUETOOTH,Manifest.permission.BLUETOOTH_ADMIN,Manifest.permission.BLUETOOTH_PRIVILEGED
+				  ,Manifest.permission.READ_CONTACTS).
 				  subscribe(new Observer< Boolean >() {
 					 @Override
 					 public void onSubscribe( final Disposable d ) {
@@ -305,6 +320,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 					 public void onNext( final Boolean pBoolean ) {
 							if(pBoolean){
 							   qDialog();
+							}else{
+							   Log.d(TAG, "error");
 							}
 					 }
 
@@ -368,39 +385,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     }
 
 
-    private void pemissions() {
+   /**
+	* 请求读取外部存储的权限
+	*/
 
-
-        RxPermissions rxPermissions = new RxPermissions(MainActivity.this);
-        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-			.subscribe(new Observer<Boolean>() {
-				@Override
-				public void onSubscribe(Disposable d) {
-
-				}
-
-				@Override
-				public void onNext(Boolean aBoolean) {
-					if (aBoolean) { //如果允许
-					   selectImg();
-					} else {
-						Toast.makeText(MainActivity.this, R.string.permission_request_denied, Toast.LENGTH_LONG)
-							.show();
-					}
-				}
-
-				@Override
-				public void onError(Throwable e) {
-
-				}
-
-				@Override
-				public void onComplete() {
-
-				}
-			});
-
-    }
 
    private void selectImg() {
 	  Matisse.from(MainActivity.this)
