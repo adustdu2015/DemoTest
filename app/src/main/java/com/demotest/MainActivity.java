@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.demotest.Bean.HeFeng;
+import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
@@ -44,7 +46,6 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,9 +57,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
    private static final int REQUEST_CODE_CHOOSE = 23;
    private  static  final String urls = "https://free-api.heweather.com/v5/weather";
-    private Button mButton,  button4 , button5 ,button6 ,button7 ,rx , weath ;
+    private Button mButton,  button4 , button5 ,button6 ,button7 ,rx , weath ,imageC;
     private static final String TAG = "MainActivity";
-    private ImageView imageC , iv_next , more_image;
+   private ImageView iv_next;
+   private ImageView more_image;
     private TextView temp;
     IWeather iWeather;
    private ImageView photo_view;
@@ -67,6 +69,13 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     private Animation animation = null;
     private QMUITipDialog tipDialog;
     NiceDialog fNiceDialog = NiceDialog.init();
+
+   Retrofit retrofit2 = new Retrofit.Builder()
+	   .baseUrl("https://api.thinkpage.cn")
+	   .addConverterFactory(GsonConverterFactory.create())
+	   .client(new OkHttpClient())
+	   .build();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,18 +125,6 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 		  }
 	   });
 
-	   Observable.create(new ObservableOnSubscribe< Integer >() {
-		  @Override
-		  public void subscribe( final ObservableEmitter< Integer > e ) throws Exception {
-			e.onNext(5);
-		  }
-	   }).subscribe(new Consumer< Integer >() {
-		  @Override
-		  public void accept( final Integer pInteger ) throws Exception {
-			 Log.d(TAG, "accept: "+ pInteger.toString());
-		  }
-	   });
-
         initView();
     }
 
@@ -142,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         mButton = (Button) findViewById(R.id.btn);
 	   	mButton.setOnClickListener(this);
 
-        imageC = ( ImageView ) findViewById(R.id.img_setting);
+        imageC = ( Button ) findViewById(R.id.img_setting);
 	   	imageC.setOnClickListener(this);
 
         temp = ( TextView ) findViewById(R.id.temp);
@@ -151,18 +148,22 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 	   	button4.setOnClickListener(this);
         button5  = ( Button ) findViewById(R.id.button5);
 	   	button5.setOnClickListener(this);
+
         button6 = ( Button ) findViewById(R.id.button6);
 	   	button6.setOnClickListener(this);
+
         button7 = ( Button ) findViewById(R.id.button7);
 	   	button7.setOnClickListener(this);
+
         fab = ( FloatingActionButton ) findViewById(R.id.fab);
 	   	fab.setOnClickListener(this);
-        Retrofit retrofit2 = new Retrofit.Builder()
-            .baseUrl("https://api.thinkpage.cn")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(new OkHttpClient())
-            .build();
+
+
+
         iWeather = retrofit2.create(IWeather.class);
+
+
+
         iv_next = ( ImageView ) findViewById(R.id.iv_next);
 	   	iv_next.setOnClickListener(this);
 
@@ -292,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 		   case R.id.rx:
 		      //申请读取SMS
 		      RxPermissions mRxPermissions = new RxPermissions(MainActivity.this);
-			  mRxPermissions.request(Manifest.permission.READ_SMS).
+			  mRxPermissions.request(Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS).
 				  subscribe(new Observer< Boolean >() {
 					 @Override
 					 public void onSubscribe( final Disposable d ) {
@@ -324,16 +325,19 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 		      OkGo.get(urls).params(mHttpParams).execute(new StringCallback() {
 				 @Override
 				 public void onSuccess( final String pS, final okhttp3.Call call, final okhttp3.Response response ) {
-					Log.e(TAG, pS );
+					Gson mGson =new Gson();
+					HeFeng mHeFeng = mGson.fromJson(pS ,HeFeng.class);
+					Toast.makeText(MainActivity.this, mHeFeng.getHeWeather5().get(0).getAqi().getCity().getQlty(),Toast.LENGTH_SHORT).show();
 				 }
 			  });
 		      break;
         }
     }
 
-    private void retro() {
-
-
+   /**
+	* 获取retrofit天气
+	*/
+   private void retro() {
 	   //retrofit的使用
         Call<WeatherBean> call = iWeather.weather("rot2enzrehaztkdk","shijiazhuang");
         call.enqueue(new Callback<WeatherBean>() {
@@ -358,14 +362,16 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 				Log.d("cylog", "Error" + t.toString());
 			}
 		});
-	   Toasty.success(MainActivity.this, "修改成功", Toast.LENGTH_SHORT, true).show();
+
+
     }
+
 
     private void pemissions() {
 
 
         RxPermissions rxPermissions = new RxPermissions(MainActivity.this);
-        rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE)
+        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 			.subscribe(new Observer<Boolean>() {
 				@Override
 				public void onSubscribe(Disposable d) {

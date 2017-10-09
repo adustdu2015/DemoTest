@@ -75,11 +75,12 @@
 					android:orientation="horizontal"
 					android:padding="10dp"
 					>
-					<ImageView
+					<Button
 						android:id="@+id/img_setting"
-						android:layout_width = "40dp"
-						android:layout_height = "40dp"
-						android:src="@drawable/ic_build_green_600_24dp"
+						android:layout_width = "wrap_content"
+						android:layout_height = "wrap_content"
+						android:text="retrofit的使用"
+						android:fontFamily="sans-serif"
 						/>
 					
 					<ImageView
@@ -150,7 +151,7 @@
 					android:id="@+id/weath"
 					android:layout_width = "wrap_content"
 					android:layout_height = "wrap_content"
-					android:text="天气情况"
+					android:text="OkGo实现和风天气情况"
 					android:textAllCaps="false"
 					/>
 				<ImageView
