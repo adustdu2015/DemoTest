@@ -8,10 +8,5 @@ QMUI的使用。
 
 screenshot:
 
-![](https://i.imgur.com/OCqsG1c.png)
-
-
-![](https://i.imgur.com/tZJ0idV.png)
-
-
+![](https://i.imgur.com/OCqsG1c.png) ![](https://i.imgur.com/tZJ0idV.png)
 ![](https://i.imgur.com/FQV5eMf.png)
