@@ -254,6 +254,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 			  break;
 
             case R.id.button4:
+               //请求权限
                 pemissions();
                 break;
 
