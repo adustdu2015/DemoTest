@@ -10,4 +10,3 @@ screenshot:
 
 ![](https://i.imgur.com/OCqsG1c.png) ![](https://i.imgur.com/tZJ0idV.png)
 ![](https://i.imgur.com/FQV5eMf.png)
-https://github.com/adustdu2015/DemoTest/blob/master/screenshot/indicator.png
