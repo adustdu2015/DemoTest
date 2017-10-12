@@ -32,6 +32,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.wang.avi.AVLoadingIndicatorView;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
@@ -68,6 +69,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     private FloatingActionButton fab;
     private Animation animation = null;
     private QMUITipDialog tipDialog;
+
+   	private AVLoadingIndicatorView avi;
+
+   private Button showIn , hideIn;
     NiceDialog fNiceDialog = NiceDialog.init();
 
    Retrofit retrofit2 = new Retrofit.Builder()
@@ -130,7 +135,12 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     void initView(){
 
+	   showIn = ( Button ) findViewById(R.id.showIn);
+	   hideIn = ( Button ) findViewById(R.id.hideIn);
+		showIn.setOnClickListener(this);
+	   hideIn.setOnClickListener(this);
 
+	   avi = ( AVLoadingIndicatorView ) findViewById(R.id.avi);
 
         toolbar = ( Toolbar ) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -348,6 +358,14 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 					Toast.makeText(MainActivity.this, mHeFeng.getHeWeather5().get(0).getAqi().getCity().getQlty(),Toast.LENGTH_SHORT).show();
 				 }
 			  });
+		      break;
+
+
+		   case R.id.showIn:
+			  avi.show();
+		      break;
+		   case R.id.hideIn:
+			  avi.hide();
 		      break;
         }
     }

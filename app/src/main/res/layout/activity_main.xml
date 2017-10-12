@@ -135,6 +135,27 @@
 					android:text="OkGo实现和风天气情况"
 					android:textAllCaps="false"
 					/>
+				<Button
+					android:id="@+id/showIn"
+					android:layout_width = "wrap_content"
+					android:layout_height = "wrap_content"
+					android:text="展示indicator"
+					/>
+				<Button
+					android:id="@+id/hideIn"
+					android:layout_width = "wrap_content"
+					android:layout_height = "wrap_content"
+					android:text="隐藏indicator"
+					/>
+				<com.wang.avi.AVLoadingIndicatorView
+					android:id="@+id/avi"
+					android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				style="@style/AVLoadingIndicatorView"
+				android:visibility="invisible"
+				app:indicatorName="LineScalePartyIndicator"
+				app:indicatorColor="#4bc0c3"
+				/>
 				<ImageView
 					android:id="@+id/photo_view"
 					android:layout_width="200dp"
