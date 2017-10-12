@@ -154,7 +154,7 @@
 				style="@style/AVLoadingIndicatorView"
 				android:visibility="invisible"
 				app:indicatorName="LineScalePartyIndicator"
-				app:indicatorColor="#4bc0c3"
+				app:indicatorColor="#333333"
 				/>
 				<ImageView
 					android:id="@+id/photo_view"
