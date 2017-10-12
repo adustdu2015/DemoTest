@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.demotest.Bean.HeFeng;
 import com.google.gson.Gson;
+import com.heima.easysp.SharedPreferencesUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
@@ -54,7 +55,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
+public class MainActivity extends AppCompatActivity  implements  View.OnClickListener{
 
    private static final int REQUEST_CODE_CHOOSE = 23;
    private  static  final String urls = "https://free-api.heweather.com/v5/weather";
@@ -360,9 +361,12 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 			  });
 		      break;
 		   case R.id.showIn:
+			  SharedPreferencesUtils.init(MainActivity.this).putString("key" , "value");
 			  avi.show();
 		      break;
 		   case R.id.hideIn:
+		      Toast.makeText(MainActivity.this ,SharedPreferencesUtils.init(MainActivity.this).getString("key"),Toast.LENGTH_SHORT).show();
+//			  Toast.makeText(MainActivity.this ,SharedPreferencesUtils.init(MainActivity.this).getString("keys"),Toast.LENGTH_SHORT).show();
 			  avi.hide();
 		      break;
         }
