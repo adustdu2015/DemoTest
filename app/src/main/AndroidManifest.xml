@@ -30,7 +30,8 @@
 		>
 		<activity
 			android:name = ".MainActivity"
-			android:label = "网易云音乐"
+			android:label = "@string/app_name"
+			android:theme = "@style/appThemeSecond"
 			>
 			<intent-filter>
 				<action android:name = "android.intent.action.MAIN" />
