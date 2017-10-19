@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import org.simple.eventbus.EventBus;
 
@@ -33,6 +34,8 @@ public class Main2Activity extends AppCompatActivity
    NavigationView fNavView;
    @BindView (R.id.drawer_layout)
    DrawerLayout fDrawerLayout;
+   @BindView (R.id.search_view)
+   MaterialSearchView fSearchView;
    private MyAdapter mAdapter;
    private List< Fruit > mFruits = new ArrayList<>();
 
@@ -83,8 +86,6 @@ public class Main2Activity extends AppCompatActivity
    }
 
 
-
-
    private void initFruit() {
 	  for ( int i = 0; i < 2; i++ ) {
 		 Fruit mfruit = new Fruit(R.drawable.ic_build_green_600_24dp, "头像一" + i, "平平凡凡才是真");
@@ -115,7 +116,7 @@ public class Main2Activity extends AppCompatActivity
 	  mAdapter.notifyDataSetChanged();
    }
 
-   void initView(){
+   void initView() {
 
 	  setSupportActionBar(fToolbar);
 	  LinearLayoutManager vManager = new LinearLayoutManager(this);
@@ -128,16 +129,30 @@ public class Main2Activity extends AppCompatActivity
 
 	  fNavView.setNavigationItemSelectedListener(this);
 
+	  fSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+		 @Override
+		 public boolean onQueryTextSubmit( final String pS ) {
+			Toast.makeText(Main2Activity.this , pS , Toast.LENGTH_SHORT).show();
+			return false;
+
+		 }
+
+		 @Override
+		 public boolean onQueryTextChange( final String pS ) {
+			Toast.makeText(Main2Activity.this , pS , Toast.LENGTH_SHORT).show();
+			return false;
+		 }
+	  });
 
    }
-
-
 
 
    @Override
    public boolean onCreateOptionsMenu( Menu menu ) {
 	  // Inflate the menu; this adds items to the action bar if it is present.
 	  getMenuInflater().inflate(R.menu.main2, menu);
+	  MenuItem item = menu.findItem(R.id.action_search);
+	  fSearchView.setMenuItem(item);
 	  return true;
    }
 
@@ -147,19 +162,22 @@ public class Main2Activity extends AppCompatActivity
 	  // automatically handle clicks on the Home/Up button, so long
 	  // as you specify a parent activity in AndroidManifest.xml.
 	  int id = item.getItemId();
+	  switch ( id ){
+		 case R.id.action_settings:
+			for ( int i = 10; i < 12; i++ ) {
+			   Fruit mfruit = new Fruit(R.drawable.ic_build_green_600_24dp, "头像一:" + i, "平平凡凡才是真");
+			   Fruit mfruit2 = new Fruit(R.drawable.ic_alarm_add_red_400_36dp, "头像二:" + i, "平平凡凡才是真");
+			   mFruits.add(0, mfruit);
+			   mFruits.add(0, mfruit2);
+			}
+			mAdapter.notifyDataSetChanged();
 
-	  //noinspection SimplifiableIfStatement
-	  if ( id == R.id.action_settings ) {
-		 for ( int i = 10; i < 12; i++ ) {
-			Fruit mfruit = new Fruit(R.drawable.ic_build_green_600_24dp, "头像一:" + i, "平平凡凡才是真");
-			Fruit mfruit2 = new Fruit(R.drawable.ic_alarm_add_red_400_36dp, "头像二:" + i, "平平凡凡才是真");
-			mFruits.add(0, mfruit);
-			mFruits.add(0, mfruit2);
-		 }
-		 mAdapter.notifyDataSetChanged();
+			Toast.makeText(this, "111", Toast.LENGTH_SHORT).show();
+			break;
+		 case R.id.action_search:
 
-		 Toast.makeText(this, "111", Toast.LENGTH_SHORT).show();
-		 return true;
+		    break;
+
 	  }
 	  return super.onOptionsItemSelected(item);
    }

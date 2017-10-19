@@ -95,8 +95,8 @@ public class FullscreenActivity extends Activity {
 	  mVisible = true;
 	  mControlsView = findViewById(R.id.fullscreen_content_controls);
 	  mContentView = findViewById(R.id.fullscreen_content);
-
-	  Glide.with(FullscreenActivity.this).load("https://camo.githubusercontent.com/01d7cd346e06cbe491ea10548062285f7ac49bab/68747470733a2f2f692e696d6775722e636f6d2f46515635654d662e706e67").into(( ImageView ) mContentView);
+	  final  String urls = "http://www.runoob.com/wp-content/uploads/2015/06/17584073.jpg";
+	  Glide.with(FullscreenActivity.this).load(urls).into(( ImageView ) mContentView);
 
 	  // Set up the user interaction to manually show or hide the system UI.
 	  mContentView.setOnClickListener(new View.OnClickListener() {
