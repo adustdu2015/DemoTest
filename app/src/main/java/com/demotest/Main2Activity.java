@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import org.simple.eventbus.EventBus;
 
@@ -34,9 +33,7 @@ public class Main2Activity extends AppCompatActivity
    NavigationView fNavView;
    @BindView (R.id.drawer_layout)
    DrawerLayout fDrawerLayout;
-   @BindView (R.id.search_view)
-   MaterialSearchView fSearchView;
-   private MyAdapter mAdapter;
+   private  MyAdapter mAdapter;
    private List< Fruit > mFruits = new ArrayList<>();
 
    @Override
@@ -129,20 +126,7 @@ public class Main2Activity extends AppCompatActivity
 
 	  fNavView.setNavigationItemSelectedListener(this);
 
-	  fSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-		 @Override
-		 public boolean onQueryTextSubmit( final String pS ) {
-			Toast.makeText(Main2Activity.this , pS , Toast.LENGTH_SHORT).show();
-			return false;
 
-		 }
-
-		 @Override
-		 public boolean onQueryTextChange( final String pS ) {
-			Toast.makeText(Main2Activity.this , pS , Toast.LENGTH_SHORT).show();
-			return false;
-		 }
-	  });
 
    }
 
@@ -152,7 +136,6 @@ public class Main2Activity extends AppCompatActivity
 	  // Inflate the menu; this adds items to the action bar if it is present.
 	  getMenuInflater().inflate(R.menu.main2, menu);
 	  MenuItem item = menu.findItem(R.id.action_search);
-	  fSearchView.setMenuItem(item);
 	  return true;
    }
 
