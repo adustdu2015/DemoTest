@@ -255,10 +255,12 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 		   case R.id.showIn:
 			  SharedPreferencesUtils.init(MainActivity.this).putString("key" , "value");
 			  avi.show();
+
 		      break;
 		   case R.id.hideIn:
-		      Toast.makeText(MainActivity.this ,SharedPreferencesUtils.init(MainActivity.this).getString("key"),Toast.LENGTH_SHORT).show();
-			  avi.hide();
+//		      Toast.makeText(MainActivity.this ,SharedPreferencesUtils.init(MainActivity.this).getString("key"),Toast.LENGTH_SHORT).show();
+//			  avi.hide();
+			  startActivity(new Intent(MainActivity.this ,Detail.class));
 		      break;
 		   default:break;
         }

@@ -7,7 +7,5 @@ QMUI的使用。
 下载体验地址: [https://fir.im/mks2?release_id=59d9cb33959d692ac300000c](https://fir.im/mks2?release_id=59d9cb33959d692ac300000c "https://fir.im/mks2?release_id=59d9cb33959d692ac300000c")
 
 screenshot:
-![](https://github.com/adustdu2015/DemoTest/blob/master/screenshot/image.png?raw=true)
-![](https://github.com/adustdu2015/DemoTest/blob/master/screenshot/image2.png?raw=true)
-![](https://github.com/adustdu2015/DemoTest/blob/master/screenshot/image3.png?raw=true)
+![](https://github.com/adustdu2015/DemoTest/blob/master/screenshot/image.png?raw=true)![](https://github.com/adustdu2015/DemoTest/blob/master/screenshot/image2.png?raw=true)![](https://github.com/adustdu2015/DemoTest/blob/master/screenshot/image3.png?raw=true)
 图有点大凑活着看吧。
