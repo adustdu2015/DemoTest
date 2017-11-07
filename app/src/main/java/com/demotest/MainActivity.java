@@ -2,6 +2,7 @@ package com.demotest;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 
    private static final int REQUEST_CODE_CHOOSE = 23;
    private  static  final String urls = "https://free-api.heweather.com/v5/weather";
-    private Button mButton ,button6 ,button7 ,rx , weath;
+    private Button mButton ,button6 ,button7 ,rx , weath,frame;
     private static final String TAG = "MainActivity";
    private ImageView iv_next;
    private ImageView more_image;
@@ -58,11 +59,11 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
     private Animation animation = null;
 	private EditText mEditText;
    	private AVLoadingIndicatorView avi;
-
    private Button showIn , hideIn;
     NiceDialog fNiceDialog = NiceDialog.init();
+   private AnimationDrawable animationDrawable;
 
-    @Override
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -119,7 +120,8 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 	   hideIn = ( Button ) findViewById(R.id.hideIn);
 		showIn.setOnClickListener(this);
 	   hideIn.setOnClickListener(this);
-
+	   frame = ( Button ) findViewById(R.id.frame);
+	   frame.setOnClickListener(this);
 	   avi = ( AVLoadingIndicatorView ) findViewById(R.id.avi);
 
         toolbar = ( Toolbar ) findViewById(R.id.toolbar);
@@ -147,7 +149,6 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 	   weath.setOnClickListener(this);
 
 	   photo_view = ( ImageView ) findViewById(R.id.photo_view);
-	   photo_view.setImageResource(R.drawable.postsql);
 	   photo_view.setOnClickListener(this);
     }
 
@@ -262,6 +263,11 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 //			  avi.hide();
 			  startActivity(new Intent(MainActivity.this ,Detail.class));
 		      break;
+		   case R.id.frame:
+			  photo_view.setImageResource(R.drawable.animation1);
+			  animationDrawable = (AnimationDrawable) photo_view.getDrawable();
+			  animationDrawable.start();
+			  break;
 		   default:break;
         }
     }

@@ -71,6 +71,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     debugCompile 'com.apkfuns.logutils:library:1.5.1.1'
     releaseCompile 'com.apkfuns.logutils:logutils-no-op:1.5.1.1'
+    compile 'com.github.open-android:FragmentTabhostUtils:0.5.0'
 }
 repositories {
     mavenCentral()
