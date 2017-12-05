@@ -35,3 +35,5 @@
 -keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
     <init>(java.lang.Throwable);
 }
+-dontwarn okio.**
+-dontwarn javax.annotation.**
