@@ -1,9 +1,10 @@
 package com.demotest;
 
+import android.Manifest;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +17,13 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apkfuns.logutils.LogUtils;
 import com.demotest.Bean.HeFeng;
+import com.demotest.utils.CountDownTimerUtils;
 import com.google.gson.Gson;
 import com.heima.easysp.SharedPreferencesUtils;
 import com.lzy.okgo.OkGo;
@@ -29,11 +33,8 @@ import com.othershe.nicedialog.BaseNiceDialog;
 import com.othershe.nicedialog.NiceDialog;
 import com.othershe.nicedialog.ViewConvertListener;
 import com.othershe.nicedialog.ViewHolder;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.wang.avi.AVLoadingIndicatorView;
-import com.zhihu.matisse.Matisse;
-import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.engine.impl.GlideEngine;
-import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
@@ -43,6 +44,10 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import me.drakeet.support.toast.ToastCompat;
+import okhttp3.Call;
+import okhttp3.Response;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity  implements  View.OnClickListener{
 
@@ -59,16 +64,22 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
     private Animation animation = null;
 	private EditText mEditText;
    	private AVLoadingIndicatorView avi;
-   private Button showIn , hideIn;
+   private Button showIn , hideIn,btn_send;
     NiceDialog fNiceDialog = NiceDialog.init();
    private AnimationDrawable animationDrawable;
-
+   private static final int REQUEST_QR_CODE = 1;
+   private ConstraintLayout mConstraintLayout;
+   private LinearLayout line4;
+   private TextView tv_header;
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 	   EventBus.getDefault().register(this);
 
+	  LogUtils.d("aaaa");
+	  LogUtils.d(new NullPointerException("12345"));
+	  initView();
 
 	   Observable.create(new ObservableOnSubscribe< Integer >() {
 		  @Override
@@ -111,10 +122,33 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 		  }
 	   });
 
-        initView();
+
     }
 
     void initView(){
+	   tv_header = ( TextView ) findViewById(R.id.tv_header);
+	   tv_header.setOnClickListener(new View.OnClickListener() {
+		  @Override
+		  public void onClick( final View v ) {
+
+		  }
+	   });
+
+
+
+
+	   line4 = ( LinearLayout ) findViewById(R.id.line4);
+	   btn_send = ( Button ) findViewById(R.id.btn_send);
+	   btn_send.setOnClickListener(new View.OnClickListener() {
+		  @Override
+		  public void onClick( final View v ) {
+			final CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(btn_send,60000,1000);
+			 mCountDownTimerUtils.start();
+		  }
+	   });
+	   mConstraintLayout = ( ConstraintLayout ) findViewById(R.id.main_constraint);
+
+
 		mEditText = ( EditText ) findViewById(R.id.main_edit);
 	   showIn = ( Button ) findViewById(R.id.showIn);
 	   hideIn = ( Button ) findViewById(R.id.hideIn);
@@ -150,23 +184,6 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 
 	   photo_view = ( ImageView ) findViewById(R.id.photo_view);
 	   photo_view.setOnClickListener(this);
-    }
-
-
-   /**
-	* 图片选择的回调函数
-	* @param requestCode
-	* @param resultCode
-	* @param data
-	*/
-   @Override
-    protected void onActivityResult( final int requestCode, final int resultCode, final Intent data ) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
-            Log.e(TAG, String.valueOf(Matisse.obtainResult(data)));
-            Log.d(TAG, String.valueOf(Matisse.obtainPathResult(data)));
-
-        }
     }
 
     @Override
@@ -218,15 +235,43 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 		   case R.id.photo_view:
 		      Intent mIntent = new Intent(MainActivity.this ,ImageGallery.class);
 			  mIntent.putExtra("keys" ,"postsql");
+			  Timber.tag("LifeCycles");
+			  Timber.d("Activity Created");
+			  Timber.i("aaaaaaaaa");
+			  Timber.i(String.format("%s%s"),"aaa","bbb");
 		      startActivity(mIntent);
 			  break;
 
             case  R.id.iv_next:
-			   Toast.makeText(MainActivity.this, "拒绝了权限", Toast.LENGTH_SHORT).show();
+			   RxPermissions rxPermissions = new RxPermissions(this);
+			  	rxPermissions.request(Manifest.permission.CAMERA).subscribe(new Observer< Boolean >() {
+				   @Override
+				   public void onSubscribe( final Disposable d ) {
+
+				   }
+
+				   @Override
+				   public void onNext( final Boolean aBoolean ) {
+						if(aBoolean){
+						   Log.d(TAG, "ok");
+						}
+				   }
+
+				   @Override
+				   public void onError( final Throwable e ) {
+
+				   }
+
+				   @Override
+				   public void onComplete() {
+
+				   }
+				});
 
                 break;
             case R.id.fab:
-			   startActivity(new Intent(MainActivity.this ,FullscreenActivity.class));
+			   ToastCompat.makeText(MainActivity.this, "hello world!", Toast.LENGTH_SHORT).show();
+//			   ActivitySplitAnimationUtil.startActivity(MainActivity.this, new Intent(MainActivity.this, FullscreenActivity.class));
                 break;
 		   case R.id.btn:
 		      startActivity(new Intent(MainActivity.this,Main3Activity.class));
@@ -250,17 +295,20 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 						   "\n当前温度:"+mHeFeng.getHeWeather5().get(0).getNow().getTmp()
 					   );
 					}
+
+					@Override
+					public void onError( final Call call, final Response response, final Exception e ) {
+					   Toast.makeText(MainActivity.this, ( CharSequence ) response.body(), Toast.LENGTH_SHORT).show();
+					}
 				 });
 			  }
 		      break;
 		   case R.id.showIn:
 			  SharedPreferencesUtils.init(MainActivity.this).putString("key" , "value");
 			  avi.show();
-
 		      break;
 		   case R.id.hideIn:
-//		      Toast.makeText(MainActivity.this ,SharedPreferencesUtils.init(MainActivity.this).getString("key"),Toast.LENGTH_SHORT).show();
-//			  avi.hide();
+			  avi.hide();
 			  startActivity(new Intent(MainActivity.this ,Detail.class));
 		      break;
 		   case R.id.frame:
@@ -272,44 +320,16 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
         }
     }
 
-
-   /**
-	* 请求读取外部存储的权限
-	*/
-
-
-   private void selectImg() {
-	  Matisse.from(MainActivity.this)
-		.choose(MimeType.ofAll())
-		.countable(true)
-		.capture(true)
-		.captureStrategy(
-		   new CaptureStrategy(true, "com.zhihu.matisse.sample.fileprovider"))
-		.maxSelectable(9)
-//                                            .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-		.gridExpectedSize(
-		   getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
-		.restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-		.thumbnailScale(0.85f)
-		.imageEngine(new GlideEngine())
-		.forResult(REQUEST_CODE_CHOOSE);
+   @Override
+   protected void onActivityResult( int requestCode, int resultCode, Intent data) {
+	  super.onActivityResult(requestCode, resultCode, data);
+	  if (resultCode == RESULT_OK
+		  && requestCode == REQUEST_QR_CODE
+		  && data != null) {
+		 String result = data.getStringExtra("result");
+		 Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+	  }
    }
-
-    void niceDialog(){
-
-        fNiceDialog
-            .setLayoutId(R.layout.loading_layout)
-            .setWidth(100)
-            .setHeight(100)
-            .setDimAmount(0)
-            .show(getSupportFragmentManager());
-        button7.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                fNiceDialog.dismiss();
-            }
-        },1500);
-    }
 
 
    @Override

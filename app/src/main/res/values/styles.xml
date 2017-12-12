@@ -12,7 +12,7 @@
 	<style name = "AppThemeMain" parent = "Theme.AppCompat.Light.NoActionBar">
 		<item name = "colorPrimary">#ce3d3a</item>
 		<item name = "colorPrimaryDark">#ce3d3a</item>
-		<item name = "colorAccent">#ffffff</item>
+		<item name = "colorAccent">#333333</item>
 		<item name = "android:textColorPrimary">#ce3d3a</item>
 	
 	</style>

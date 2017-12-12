@@ -2,7 +2,12 @@
 <resources>
 	<color name = "colorPrimary">#ce3d3a</color>
 	<color name = "colorPrimaryDark">#ce3d3a</color>
-	<color name = "colorAccent">#ffffff</color>
+	<color name = "colorAccent">#333333</color>
 	
 	<color name = "black_overlay">#66000000</color>
+	
+	<color name = "primary_color">#ce3d3c</color>
+	<color name = "content_bg">#f2f4f5</color>
+	<color name = "primary_text">#ce3d3a</color>
+	<color name = "div_line">#10000000</color>
 </resources>

@@ -10,10 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.demotest.utils.ActivitySplitAnimationUtil;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
+ * @author a
  */
 public class FullscreenActivity extends Activity {
 
@@ -78,8 +80,10 @@ public class FullscreenActivity extends Activity {
    @Override
    protected void onCreate( Bundle savedInstanceState ) {
 	  super.onCreate(savedInstanceState);
-
+	  ActivitySplitAnimationUtil.prepareAnimation(this);
 	  setContentView(R.layout.activity_fullscreen);
+
+	  ActivitySplitAnimationUtil.animate(this, 1000);
 
 	  mVisible = true;
 	  mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -152,5 +156,12 @@ public class FullscreenActivity extends Activity {
    private void delayedHide( int delayMillis ) {
 	  mHideHandler.removeCallbacks(mHideRunnable);
 	  mHideHandler.postDelayed(mHideRunnable, delayMillis);
+   }
+   @Override
+   protected void onStop() {
+	  // If we're currently running the entrance animation - cancel it
+	  ActivitySplitAnimationUtil.cancel();
+
+	  super.onStop();    //To change body of overridden methods use File | Settings | File Templates.
    }
 }
