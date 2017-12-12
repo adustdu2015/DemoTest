@@ -22,7 +22,11 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 /**
+<<<<<<< HEAD
  * Created by a on 2017/12/12.
+=======
+ * Created by a on 2017/11/13.
+>>>>>>> origin/master
  */
 
 public class ActivitySplitAnimationUtil {
@@ -141,8 +145,14 @@ public class ActivitySplitAnimationUtil {
 	* Cancel an in progress animation
 	*/
    public static void cancel() {
+<<<<<<< HEAD
 	  if (mSetAnim != null)
 		 mSetAnim.cancel();
+=======
+	  if (mSetAnim != null){
+		 mSetAnim.cancel();
+	  }
+>>>>>>> origin/master
    }
 
    /**
@@ -186,8 +196,14 @@ public class ActivitySplitAnimationUtil {
 	  // If the split Y coordinate is -1 - We'll split the activity equally
 	  splitYCoord = (splitYCoord != -1 ? splitYCoord : mBitmap.getHeight() / 2);
 
+<<<<<<< HEAD
 	  if (splitYCoord > mBitmap.getHeight())
 		 throw new IllegalArgumentException("Split Y coordinate [" + splitYCoord + "] exceeds the activity's height [" + mBitmap.getHeight() + "]");
+=======
+	  if (splitYCoord > mBitmap.getHeight()){
+		 throw new IllegalArgumentException("Split Y coordinate [" + splitYCoord + "] exceeds the activity's height [" + mBitmap.getHeight() + "]");
+	  }
+>>>>>>> origin/master
 
 	  // Set the location to put the 2 bitmaps on the destination activity
 	  mLoc1 = new int[]{0, splitYCoord, root.getTop()};
@@ -241,8 +257,13 @@ public class ActivitySplitAnimationUtil {
 	   * Setting the bitmap offests to control the visible area
 	   *
 	   * @param width		   The bitmap image
+<<<<<<< HEAD
 //	   * @param bmp          The start Y position
 //	   * @param loc          The end Y position
+=======
+	   * @param startY          The start Y position
+	   * @param endY          The end Y position
+>>>>>>> origin/master
 	   * @return
 	   */
 	  public void setImageOffsets(int width, int startY, int endY)
