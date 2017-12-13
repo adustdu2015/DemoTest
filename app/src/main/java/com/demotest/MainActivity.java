@@ -133,7 +133,6 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 	   tv_header.setOnClickListener(new View.OnClickListener() {
 		  @Override
 		  public void onClick( final View v ) {
-
 		  }
 	   });
 
