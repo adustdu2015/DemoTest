@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.apkfuns.logutils.LogUtils;
 import com.demotest.Bean.HeFeng;
 import com.demotest.utils.CountDownTimerUtils;
+import com.demotest.utils.UnitConvert;
 import com.google.gson.Gson;
 import com.heima.easysp.SharedPreferencesUtils;
 import com.lzy.okgo.OkGo;
@@ -126,6 +127,8 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
     }
 
     void initView(){
+
+
 	   tv_header = ( TextView ) findViewById(R.id.tv_header);
 	   tv_header.setOnClickListener(new View.OnClickListener() {
 		  @Override
@@ -134,7 +137,7 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
 		  }
 	   });
 
-
+	   Log.d(TAG, "unitConvert: "+ UnitConvert.px2dip(MainActivity.this,20L));
 
 
 	   line4 = ( LinearLayout ) findViewById(R.id.line4);
@@ -227,7 +230,8 @@ public class MainActivity extends AppCompatActivity  implements  View.OnClickLis
    }
 
 
-    @Override
+
+   @Override
     public void onClick( final View v ) {
 
         switch ( v.getId()  ){
